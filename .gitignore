@@ -361,3 +361,9 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+# Local app secrets / local tooling
+Jiniks/appsettings.json
+Jiniks/jiniks-doc.pdf
+Jiniks/jinik-doc.pdf
+.claude/
