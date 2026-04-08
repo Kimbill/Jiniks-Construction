@@ -1,4 +1,4 @@
-@model List<ContactMessage>
+@model PaginatedList<ContactMessage>
 @{
     ViewData["Title"] = "Contact Messages";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
@@ -54,3 +54,5 @@
         </div>
     }
 </div>
+
+@await Html.PartialAsync("_PaginationPartial", new PaginationInfo(Model.PageIndex, Model.TotalPages, Model.TotalCount, "/Admin/Contacts"))

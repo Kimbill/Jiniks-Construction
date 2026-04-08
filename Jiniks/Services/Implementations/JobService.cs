@@ -1,4 +1,5 @@
 using Jiniks.Data;
+using Jiniks.Models.Common;
 using Jiniks.Models.Entities;
 using Jiniks.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -30,6 +31,33 @@ public class JobService : IJobService
             .Include(j => j.Applications)
             .OrderByDescending(j => j.CreatedAt)
             .ToListAsync();
+    }
+
+    public async Task<PaginatedList<JobOpening>> GetAllPagedAsync(int page, int pageSize)
+    {
+        var query = _context.JobOpenings
+            .Include(j => j.Applications)
+            .OrderByDescending(j => j.CreatedAt);
+
+        return await PaginatedList<JobOpening>.CreateAsync(query, page, pageSize);
+    }
+
+    public async Task<PaginatedList<JobOpening>> GetActivePagedAsync(int page, int pageSize)
+    {
+        var query = _context.JobOpenings
+            .Where(j => j.IsActive)
+            .OrderByDescending(j => j.CreatedAt);
+
+        return await PaginatedList<JobOpening>.CreateAsync(query, page, pageSize);
+    }
+
+    public async Task<PaginatedList<JobApplication>> GetApplicationsPagedAsync(Guid jobId, int page, int pageSize)
+    {
+        var query = _context.JobApplications
+            .Where(a => a.JobOpeningId == jobId)
+            .OrderByDescending(a => a.CreatedAt);
+
+        return await PaginatedList<JobApplication>.CreateAsync(query, page, pageSize);
     }
 
     public async Task<JobOpening?> GetByIdAsync(Guid id)

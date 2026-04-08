@@ -1,4 +1,5 @@
 using Jiniks.Data;
+using Jiniks.Models.Common;
 using Jiniks.Models.Entities;
 using Jiniks.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -29,6 +30,14 @@ public class HeroSlideService : IHeroSlideService
         return await _context.HeroSlides
             .OrderBy(h => h.SortOrder)
             .ToListAsync();
+    }
+
+    public async Task<PaginatedList<HeroSlide>> GetAllPagedAsync(int page, int pageSize)
+    {
+        var query = _context.HeroSlides
+            .OrderBy(h => h.SortOrder);
+
+        return await PaginatedList<HeroSlide>.CreateAsync(query, page, pageSize);
     }
 
     public async Task<HeroSlide?> GetByIdAsync(Guid id)

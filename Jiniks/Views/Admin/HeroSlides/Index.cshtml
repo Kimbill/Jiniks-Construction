@@ -1,4 +1,4 @@
-@model List<HeroSlide>
+@model PaginatedList<HeroSlide>
 @{
     ViewData["Title"] = "Hero Slides";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
@@ -54,3 +54,5 @@
         </tbody>
     </table>
 </div>
+
+@await Html.PartialAsync("_PaginationPartial", new PaginationInfo(Model.PageIndex, Model.TotalPages, Model.TotalCount, "/Admin/HeroSlides"))

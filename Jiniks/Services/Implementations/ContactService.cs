@@ -1,4 +1,5 @@
 using Jiniks.Data;
+using Jiniks.Models.Common;
 using Jiniks.Models.Entities;
 using Jiniks.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -21,6 +22,14 @@ public class ContactService : IContactService
         return await _context.ContactMessages
             .OrderByDescending(c => c.CreatedAt)
             .ToListAsync();
+    }
+
+    public async Task<PaginatedList<ContactMessage>> GetAllPagedAsync(int page, int pageSize)
+    {
+        var query = _context.ContactMessages
+            .OrderByDescending(c => c.CreatedAt);
+
+        return await PaginatedList<ContactMessage>.CreateAsync(query, page, pageSize);
     }
 
     public async Task<ContactMessage?> GetByIdAsync(Guid id)

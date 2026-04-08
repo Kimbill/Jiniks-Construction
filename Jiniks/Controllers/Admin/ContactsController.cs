@@ -14,9 +14,9 @@ public class ContactsController : Controller
     }
 
     [HttpGet("")]
-    public async Task<IActionResult> Index()
+    public async Task<IActionResult> Index(int page = 1)
     {
-        var messages = await _contactService.GetAllAsync();
+        var messages = await _contactService.GetAllPagedAsync(page, 10);
         return View("~/Views/Admin/Contacts/Index.cshtml", messages);
     }
 

@@ -23,9 +23,9 @@ public class ServicesController : Controller
     }
 
     [HttpGet("")]
-    public async Task<IActionResult> Index()
+    public async Task<IActionResult> Index(int page = 1)
     {
-        var services = await _serviceService.GetAllAsync();
+        var services = await _serviceService.GetAllPagedAsync(page, 10);
         return View("~/Views/Admin/Services/Index.cshtml", services);
     }
 

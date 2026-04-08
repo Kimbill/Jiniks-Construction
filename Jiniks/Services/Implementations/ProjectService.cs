@@ -1,4 +1,5 @@
 using Jiniks.Data;
+using Jiniks.Models.Common;
 using Jiniks.Models.Entities;
 using Jiniks.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -30,6 +31,24 @@ public class ProjectService : IProjectService
             .Include(p => p.Media)
             .OrderByDescending(p => p.CreatedAt)
             .ToListAsync();
+    }
+
+    public async Task<PaginatedList<Project>> GetAllPagedAsync(int page, int pageSize)
+    {
+        var query = _context.Projects
+            .Include(p => p.Media)
+            .OrderByDescending(p => p.CreatedAt);
+
+        return await PaginatedList<Project>.CreateAsync(query, page, pageSize);
+    }
+
+    public async Task<PaginatedList<Project>> GetActivePagedAsync(int page, int pageSize)
+    {
+        var query = _context.Projects
+            .Where(p => p.IsActive)
+            .OrderByDescending(p => p.CompletionDate);
+
+        return await PaginatedList<Project>.CreateAsync(query, page, pageSize);
     }
 
     public async Task<Project?> GetByIdAsync(Guid id)

@@ -14,9 +14,9 @@ public class PortfolioController : Controller
         _logger = logger;
     }
 
-    public async Task<IActionResult> Index()
+    public async Task<IActionResult> Index(int page = 1)
     {
-        var projects = await _projectService.GetActiveAsync();
+        var projects = await _projectService.GetActivePagedAsync(page, 9);
         return View(projects);
     }
 

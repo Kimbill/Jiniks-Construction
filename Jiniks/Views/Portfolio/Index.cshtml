@@ -1,4 +1,4 @@
-@model List<Project>
+@model PaginatedList<Project>
 @{
     ViewData["Title"] = "Portfolio";
 }
@@ -39,5 +39,7 @@
                 <p class="text-muted">We are preparing our portfolio. Check back soon.</p>
             </div>
         }
+
+        @await Html.PartialAsync("_PaginationPartial", new PaginationInfo(Model.PageIndex, Model.TotalPages, Model.TotalCount, "/Portfolio"))
     </div>
 </section>

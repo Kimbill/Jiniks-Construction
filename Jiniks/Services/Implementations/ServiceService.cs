@@ -1,4 +1,5 @@
 using Jiniks.Data;
+using Jiniks.Models.Common;
 using Jiniks.Models.Entities;
 using Jiniks.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -29,6 +30,14 @@ public class ServiceService : IServiceService
         return await _context.Services
             .OrderBy(s => s.SortOrder)
             .ToListAsync();
+    }
+
+    public async Task<PaginatedList<Service>> GetAllPagedAsync(int page, int pageSize)
+    {
+        var query = _context.Services
+            .OrderBy(s => s.SortOrder);
+
+        return await PaginatedList<Service>.CreateAsync(query, page, pageSize);
     }
 
     public async Task<Service?> GetByIdAsync(Guid id)

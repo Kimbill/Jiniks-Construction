@@ -1,4 +1,5 @@
 using Jiniks.Data;
+using Jiniks.Models.Common;
 using Jiniks.Models.Entities;
 using Jiniks.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -21,6 +22,14 @@ public class BookingService : IBookingService
         return await _context.Bookings
             .OrderByDescending(b => b.CreatedAt)
             .ToListAsync();
+    }
+
+    public async Task<PaginatedList<Booking>> GetAllPagedAsync(int page, int pageSize)
+    {
+        var query = _context.Bookings
+            .OrderByDescending(b => b.CreatedAt);
+
+        return await PaginatedList<Booking>.CreateAsync(query, page, pageSize);
     }
 
     public async Task<Booking?> GetByIdAsync(Guid id)

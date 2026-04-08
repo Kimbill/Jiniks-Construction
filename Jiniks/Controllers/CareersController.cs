@@ -21,9 +21,9 @@ public class CareersController : Controller
         _logger = logger;
     }
 
-    public async Task<IActionResult> Index()
+    public async Task<IActionResult> Index(int page = 1)
     {
-        var jobs = await _jobService.GetActiveAsync();
+        var jobs = await _jobService.GetActivePagedAsync(page, 10);
         return View(jobs);
     }
 

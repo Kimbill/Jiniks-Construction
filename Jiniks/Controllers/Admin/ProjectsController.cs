@@ -24,9 +24,9 @@ public class ProjectsController : Controller
     }
 
     [HttpGet("")]
-    public async Task<IActionResult> Index()
+    public async Task<IActionResult> Index(int page = 1)
     {
-        var projects = await _projectService.GetAllAsync();
+        var projects = await _projectService.GetAllPagedAsync(page, 10);
         return View("~/Views/Admin/Projects/Index.cshtml", projects);
     }
 

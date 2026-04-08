@@ -23,9 +23,9 @@ public class HeroSlidesController : Controller
     }
 
     [HttpGet("")]
-    public async Task<IActionResult> Index()
+    public async Task<IActionResult> Index(int page = 1)
     {
-        var slides = await _heroSlideService.GetAllAsync();
+        var slides = await _heroSlideService.GetAllPagedAsync(page, 10);
         return View("~/Views/Admin/HeroSlides/Index.cshtml", slides);
     }
 

@@ -1,4 +1,4 @@
-@model List<Project>
+@model PaginatedList<Project>
 @{
     ViewData["Title"] = "Manage Projects";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
@@ -57,3 +57,5 @@
         </tbody>
     </table>
 </div>
+
+@await Html.PartialAsync("_PaginationPartial", new PaginationInfo(Model.PageIndex, Model.TotalPages, Model.TotalCount, "/Admin/Projects"))

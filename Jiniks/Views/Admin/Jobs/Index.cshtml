@@ -1,4 +1,4 @@
-@model List<JobOpening>
+@model PaginatedList<JobOpening>
 @{
     ViewData["Title"] = "Manage Jobs";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
@@ -62,3 +62,5 @@
         </tbody>
     </table>
 </div>
+
+@await Html.PartialAsync("_PaginationPartial", new PaginationInfo(Model.PageIndex, Model.TotalPages, Model.TotalCount, "/Admin/Jobs"))

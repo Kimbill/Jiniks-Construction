@@ -1,6 +1,7 @@
-@model JobOpening
+@model PaginatedList<JobApplication>
 @{
-    ViewData["Title"] = "Applications - " + Model.Title;
+    var job = (JobOpening)ViewBag.Job;
+    ViewData["Title"] = "Applications - " + job.Title;
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
@@ -9,10 +10,10 @@
 </div>
 
 <h4 class="fw-bold mb-1">Applications</h4>
-<p class="text-muted mb-4">For: @Model.Title</p>
+<p class="text-muted mb-4">For: @job.Title</p>
 
 <div class="bg-white rounded shadow-sm">
-    @if (Model.Applications.Any())
+    @if (Model.Any())
     {
         <table class="table admin-table mb-0">
             <thead>
@@ -26,7 +27,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var app in Model.Applications)
+                @foreach (var app in Model)
                 {
                     <tr class="@(!app.IsRead ? "table-warning" : "")">
                         <td><strong>@app.Name</strong></td>
@@ -65,3 +66,5 @@
         </div>
     }
 </div>
+
+@await Html.PartialAsync("_PaginationPartial", new PaginationInfo(Model.PageIndex, Model.TotalPages, Model.TotalCount, $"/Admin/Jobs/Applications/{job.Id}"))

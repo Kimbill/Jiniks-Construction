@@ -14,9 +14,9 @@ public class BookingsController : Controller
     }
 
     [HttpGet("")]
-    public async Task<IActionResult> Index()
+    public async Task<IActionResult> Index(int page = 1)
     {
-        var bookings = await _bookingService.GetAllAsync();
+        var bookings = await _bookingService.GetAllPagedAsync(page, 10);
         return View("~/Views/Admin/Bookings/Index.cshtml", bookings);
     }
 

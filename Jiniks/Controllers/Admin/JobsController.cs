@@ -18,9 +18,9 @@ public class JobsController : Controller
     }
 
     [HttpGet("")]
-    public async Task<IActionResult> Index()
+    public async Task<IActionResult> Index(int page = 1)
     {
-        var jobs = await _jobService.GetAllAsync();
+        var jobs = await _jobService.GetAllPagedAsync(page, 10);
         return View("~/Views/Admin/Jobs/Index.cshtml", jobs);
     }
 
@@ -101,12 +101,14 @@ public class JobsController : Controller
     }
 
     [HttpGet("Applications/{jobId}")]
-    public async Task<IActionResult> Applications(Guid jobId)
+    public async Task<IActionResult> Applications(Guid jobId, int page = 1)
     {
-        var job = await _jobService.GetByIdWithApplicationsAsync(jobId);
+        var job = await _jobService.GetByIdAsync(jobId);
         if (job == null) return NotFound();
 
-        return View("~/Views/Admin/Jobs/Applications.cshtml", job);
+        var applications = await _jobService.GetApplicationsPagedAsync(jobId, page, 10);
+        ViewBag.Job = job;
+        return View("~/Views/Admin/Jobs/Applications.cshtml", applications);
     }
 
     [HttpPost("Applications/MarkRead/{id}")]
