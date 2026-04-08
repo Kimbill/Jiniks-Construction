@@ -1,0 +1,43 @@
+@model List<Project>
+@{
+    ViewData["Title"] = "Portfolio";
+}
+
+<div class="page-header">
+    <div class="container">
+        <h1>Our Portfolio</h1>
+        <p>Explore our completed construction projects</p>
+    </div>
+</div>
+
+<section class="section-padding">
+    <div class="container">
+        @if (Model.Any())
+        {
+            <div class="row g-4">
+                @foreach (var project in Model)
+                {
+                    <div class="col-md-6 col-lg-4 fade-in">
+                        <a asp-action="Details" asp-route-id="@project.Id" class="text-decoration-none">
+                            <div class="project-card">
+                                <img src="@project.CoverImageUrl" alt="@project.Title" />
+                                <div class="project-card-overlay">
+                                    <h5>@project.Title</h5>
+                                    <span><i class="fas fa-map-marker-alt me-1"></i> @project.Location</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <div class="text-center py-5">
+                <i class="fas fa-hard-hat fa-3x text-muted mb-3"></i>
+                <h4 class="text-muted">Projects coming soon</h4>
+                <p class="text-muted">We are preparing our portfolio. Check back soon.</p>
+            </div>
+        }
+    </div>
+</section>

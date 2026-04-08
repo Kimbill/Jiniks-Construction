@@ -1,0 +1,347 @@
+:root {
+    --orange: #E87A2E;
+    --orange-hover: #D06A20;
+    --dark-gray: #2D2D2D;
+    --light-gray: #6B7280;
+    --bg-light: #F9FAFB;
+}
+
+html {
+    font-size: 14px;
+    scroll-behavior: smooth;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    color: var(--dark-gray);
+    padding-top: 76px;
+    overflow-x: hidden;
+}
+
+.text-primary-orange {
+    color: var(--orange);
+}
+
+.bg-primary-orange {
+    background-color: var(--orange);
+}
+
+.btn-orange {
+    background-color: var(--orange);
+    color: #fff;
+    border: none;
+    padding: 12px 32px;
+    font-weight: 600;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.btn-orange:hover {
+    background-color: var(--orange-hover);
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(232, 122, 46, 0.4);
+}
+
+.btn-outline-orange {
+    border: 2px solid var(--orange);
+    color: var(--orange);
+    padding: 10px 30px;
+    font-weight: 600;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    background: transparent;
+}
+
+.btn-outline-orange:hover {
+    background-color: var(--orange);
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+/* Navbar */
+#mainNav {
+    transition: all 0.3s ease;
+    z-index: 1050;
+}
+
+#mainNav .nav-link {
+    font-weight: 500;
+    color: var(--dark-gray);
+    padding: 8px 16px;
+    transition: color 0.3s ease;
+}
+
+#mainNav .nav-link:hover {
+    color: var(--orange);
+}
+
+/* Hero Section */
+.hero-section {
+    position: relative;
+    height: 100vh;
+    min-height: 600px;
+    overflow: hidden;
+}
+
+.hero-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    background-size: cover;
+    background-position: center;
+}
+
+.hero-slide.active {
+    opacity: 1;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 100%);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    color: #fff;
+    max-width: 650px;
+}
+
+.hero-content h1 {
+    font-size: 3.5rem;
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 1.25rem;
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    margin-bottom: 2rem;
+}
+
+@media (max-width: 768px) {
+    .hero-content h1 {
+        font-size: 2.2rem;
+    }
+}
+
+/* Section Styles */
+.section-padding {
+    padding: 100px 0;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    color: var(--dark-gray);
+}
+
+.section-subtitle {
+    font-size: 1.1rem;
+    color: var(--light-gray);
+    max-width: 600px;
+    margin: 0 auto 3rem;
+}
+
+/* Cards */
+.project-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+}
+
+.project-card img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.project-card:hover img {
+    transform: scale(1.08);
+}
+
+.project-card-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 30px 20px 20px;
+    background: linear-gradient(transparent, rgba(0,0,0,0.8));
+    color: #fff;
+}
+
+.project-card-overlay h5 {
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.project-card-overlay span {
+    font-size: 0.85rem;
+    opacity: 0.8;
+}
+
+/* Service Cards */
+.service-card {
+    padding: 40px 30px;
+    border-radius: 8px;
+    background: #fff;
+    border: 1px solid #f0f0f0;
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+    border-color: var(--orange);
+}
+
+.service-card .icon {
+    font-size: 2.5rem;
+    color: var(--orange);
+    margin-bottom: 1.25rem;
+}
+
+.service-card h5 {
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+}
+
+.service-card p {
+    color: var(--light-gray);
+    line-height: 1.7;
+}
+
+/* Job Card */
+.job-card {
+    padding: 25px 30px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    background: #fff;
+    transition: all 0.3s ease;
+}
+
+.job-card:hover {
+    border-color: var(--orange);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+}
+
+/* Gallery */
+.gallery-img {
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.gallery-img img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.gallery-img:hover img {
+    transform: scale(1.05);
+}
+
+/* Form Styles */
+.form-control:focus {
+    border-color: var(--orange);
+    box-shadow: 0 0 0 0.2rem rgba(232, 122, 46, 0.25);
+}
+
+.form-select:focus {
+    border-color: var(--orange);
+    box-shadow: 0 0 0 0.2rem rgba(232, 122, 46, 0.25);
+}
+
+/* Fade In Animation */
+.fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Page Header */
+.page-header {
+    background: linear-gradient(135deg, var(--dark-gray) 0%, #1a1a2e 100%);
+    padding: 80px 0 60px;
+    color: #fff;
+    margin-top: -76px;
+    padding-top: 156px;
+}
+
+.page-header h1 {
+    font-weight: 800;
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+}
+
+.page-header p {
+    opacity: 0.8;
+    font-size: 1.15rem;
+}
+
+/* Confirmation Page */
+.confirmation-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: #d4edda;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+}
+
+.confirmation-icon i {
+    font-size: 2.5rem;
+    color: #28a745;
+}
+
+/* Footer Links */
+footer a:hover {
+    color: var(--orange) !important;
+}
+
+/* About Section */
+.about-stats .stat-number {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--orange);
+}
+
+.about-stats .stat-label {
+    color: var(--light-gray);
+    font-size: 0.9rem;
+}

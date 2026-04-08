@@ -1,0 +1,62 @@
+@model HeroSlideFormViewModel
+@{
+    ViewData["Title"] = "Add Hero Slide";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="mb-4">
+    <a href="/Admin/HeroSlides" class="text-decoration-none text-muted"><i class="fas fa-arrow-left me-1"></i> Back to Hero Slides</a>
+</div>
+
+<h4 class="fw-bold mb-4">Add Hero Slide</h4>
+
+<div class="bg-white rounded shadow-sm p-4">
+    <form method="post" enctype="multipart/form-data">
+        @Html.AntiForgeryToken()
+        <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+        <div class="row g-3">
+            <div class="col-md-8">
+                <label asp-for="Headline" class="form-label fw-semibold"></label>
+                <input asp-for="Headline" class="form-control" placeholder="Main headline text" />
+                <span asp-validation-for="Headline" class="text-danger small"></span>
+            </div>
+            <div class="col-md-4">
+                <label asp-for="SortOrder" class="form-label fw-semibold">Display Order</label>
+                <input asp-for="SortOrder" type="number" class="form-control" />
+            </div>
+            <div class="col-12">
+                <label asp-for="Subtext" class="form-label fw-semibold"></label>
+                <textarea asp-for="Subtext" class="form-control" rows="2" placeholder="Supporting text below headline"></textarea>
+                <span asp-validation-for="Subtext" class="text-danger small"></span>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="CtaText" class="form-label fw-semibold">Button Text</label>
+                <input asp-for="CtaText" class="form-control" placeholder="e.g. Get Started" />
+                <span asp-validation-for="CtaText" class="text-danger small"></span>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="CtaUrl" class="form-label fw-semibold">Button Link</label>
+                <input asp-for="CtaUrl" class="form-control" placeholder="/Booking" />
+                <span asp-validation-for="CtaUrl" class="text-danger small"></span>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="BackgroundImage" class="form-label fw-semibold">Background Image</label>
+                <input asp-for="BackgroundImage" type="file" class="form-control" accept="image/*" />
+            </div>
+            <div class="col-md-6 d-flex align-items-end">
+                <div class="form-check">
+                    <input asp-for="IsActive" class="form-check-input" />
+                    <label asp-for="IsActive" class="form-check-label">Active</label>
+                </div>
+            </div>
+            <div class="col-12">
+                <button type="submit" class="btn btn-admin">Create Slide</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

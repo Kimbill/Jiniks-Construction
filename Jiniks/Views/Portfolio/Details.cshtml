@@ -1,0 +1,79 @@
+@model Project
+@{
+    ViewData["Title"] = Model.Title;
+}
+
+<div class="page-header">
+    <div class="container">
+        <h1>@Model.Title</h1>
+        <p><i class="fas fa-map-marker-alt me-1"></i> @Model.Location</p>
+    </div>
+</div>
+
+<section class="section-padding">
+    <div class="container">
+        <div class="row g-5">
+            <div class="col-lg-8 fade-in">
+                <img src="@Model.CoverImageUrl" alt="@Model.Title" class="img-fluid rounded mb-4 w-100" style="max-height: 500px; object-fit: cover;" />
+
+                @if (Model.Media.Any())
+                {
+                    <h4 class="fw-bold mb-3">Project Gallery</h4>
+                    <div class="row g-3">
+                        @foreach (var media in Model.Media)
+                        {
+                            <div class="col-md-4">
+                                <div class="gallery-img">
+                                    @if (media.MediaType == MediaType.Video)
+                                    {
+                                        <video src="@media.MediaUrl" controls class="w-100 rounded" style="height: 250px; object-fit: cover;"></video>
+                                    }
+                                    else
+                                    {
+                                        <img src="@media.MediaUrl" alt="Project media" />
+                                    }
+                                </div>
+                            </div>
+                        }
+                    </div>
+                }
+            </div>
+            <div class="col-lg-4 fade-in">
+                <div class="bg-light p-4 rounded">
+                    <h5 class="fw-bold mb-3">Project Details</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-3">
+                            <small class="text-muted d-block">Location</small>
+                            <strong>@Model.Location</strong>
+                        </li>
+                        @if (Model.CompletionDate.HasValue)
+                        {
+                            <li class="mb-3">
+                                <small class="text-muted d-block">Completion Date</small>
+                                <strong>@Model.CompletionDate.Value.ToString("MMMM yyyy")</strong>
+                            </li>
+                        }
+                        @if (!string.IsNullOrEmpty(Model.Scope))
+                        {
+                            <li class="mb-3">
+                                <small class="text-muted d-block">Scope</small>
+                                <strong>@Model.Scope</strong>
+                            </li>
+                        }
+                    </ul>
+                </div>
+
+                <div class="mt-4">
+                    <h5 class="fw-bold mb-3">Description</h5>
+                    <p class="text-muted" style="line-height: 1.8;">@Model.Description</p>
+                </div>
+
+                <a asp-controller="Booking" asp-action="Index" class="btn btn-orange w-100 mt-3">Start a Similar Project</a>
+            </div>
+        </div>
+
+        <div class="mt-4">
+            <a asp-action="Index" class="btn btn-outline-orange"><i class="fas fa-arrow-left me-2"></i>Back to Portfolio</a>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,103 @@
+.admin-sidebar {
+    width: 260px;
+    min-height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 100;
+    transition: transform 0.3s ease;
+}
+
+.admin-sidebar .nav-link {
+    border-radius: 6px;
+    padding: 10px 15px;
+    transition: all 0.2s ease;
+}
+
+.admin-sidebar .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #fff !important;
+}
+
+.admin-content {
+    margin-left: 260px;
+    min-height: 100vh;
+    background-color: #f8f9fa;
+}
+
+.stat-card {
+    padding: 25px;
+    border-radius: 10px;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    transition: all 0.2s ease;
+}
+
+.stat-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.stat-card .stat-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+}
+
+.stat-card .stat-value {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #2D2D2D;
+}
+
+.stat-card .stat-label {
+    color: #6B7280;
+    font-size: 0.85rem;
+}
+
+.admin-table th {
+    font-weight: 600;
+    color: #6B7280;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom-width: 1px;
+}
+
+.admin-table td {
+    vertical-align: middle;
+    padding: 12px;
+}
+
+.badge-unread {
+    background-color: #E87A2E;
+}
+
+.btn-admin {
+    background-color: #E87A2E;
+    color: #fff;
+    border: none;
+    font-weight: 600;
+}
+
+.btn-admin:hover {
+    background-color: #D06A20;
+    color: #fff;
+}
+
+@media (max-width: 991.98px) {
+    .admin-sidebar {
+        transform: translateX(-100%);
+    }
+
+    .admin-sidebar.show {
+        transform: translateX(0);
+    }
+
+    .admin-content {
+        margin-left: 0;
+    }
+}

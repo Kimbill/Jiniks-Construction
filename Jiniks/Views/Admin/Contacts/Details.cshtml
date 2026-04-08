@@ -1,0 +1,40 @@
+@model ContactMessage
+@{
+    ViewData["Title"] = "Message Details";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="mb-4">
+    <a href="/Admin/Contacts" class="text-decoration-none text-muted"><i class="fas fa-arrow-left me-1"></i> Back to Messages</a>
+</div>
+
+<h4 class="fw-bold mb-4">Message Details</h4>
+
+<div class="bg-white rounded shadow-sm p-4">
+    <div class="row g-4">
+        <div class="col-md-6">
+            <small class="text-muted">Name</small>
+            <p class="fw-semibold">@Model.Name</p>
+        </div>
+        <div class="col-md-6">
+            <small class="text-muted">Email</small>
+            <p class="fw-semibold">@Model.Email</p>
+        </div>
+        <div class="col-md-6">
+            <small class="text-muted">Phone</small>
+            <p class="fw-semibold">@(string.IsNullOrEmpty(Model.Phone) ? "Not provided" : Model.Phone)</p>
+        </div>
+        <div class="col-md-6">
+            <small class="text-muted">Submitted</small>
+            <p class="fw-semibold">@Model.CreatedAt.ToString("MMMM dd, yyyy - hh:mm tt")</p>
+        </div>
+        <div class="col-12">
+            <small class="text-muted">Subject</small>
+            <p class="fw-semibold">@Model.Subject</p>
+        </div>
+        <div class="col-12">
+            <small class="text-muted">Message</small>
+            <p class="fw-semibold" style="white-space: pre-line;">@Model.Message</p>
+        </div>
+    </div>
+</div>

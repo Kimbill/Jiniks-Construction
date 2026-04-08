@@ -1,0 +1,61 @@
+@model ProjectFormViewModel
+@{
+    ViewData["Title"] = "Add Project";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="mb-4">
+    <a href="/Admin/Projects" class="text-decoration-none text-muted"><i class="fas fa-arrow-left me-1"></i> Back to Projects</a>
+</div>
+
+<h4 class="fw-bold mb-4">Add New Project</h4>
+
+<div class="bg-white rounded shadow-sm p-4">
+    <form method="post" enctype="multipart/form-data">
+        @Html.AntiForgeryToken()
+        <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+        <div class="row g-3">
+            <div class="col-md-8">
+                <label asp-for="Title" class="form-label fw-semibold"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger small"></span>
+            </div>
+            <div class="col-md-4">
+                <label asp-for="Location" class="form-label fw-semibold"></label>
+                <input asp-for="Location" class="form-control" />
+                <span asp-validation-for="Location" class="text-danger small"></span>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="CompletionDate" class="form-label fw-semibold">Completion Date</label>
+                <input asp-for="CompletionDate" type="date" class="form-control" />
+            </div>
+            <div class="col-md-6">
+                <label asp-for="Scope" class="form-label fw-semibold"></label>
+                <input asp-for="Scope" class="form-control" placeholder="e.g. 5-bedroom duplex" />
+            </div>
+            <div class="col-12">
+                <label asp-for="Description" class="form-label fw-semibold"></label>
+                <textarea asp-for="Description" class="form-control" rows="4"></textarea>
+                <span asp-validation-for="Description" class="text-danger small"></span>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="CoverImage" class="form-label fw-semibold">Cover Image</label>
+                <input asp-for="CoverImage" type="file" class="form-control" accept="image/*" />
+            </div>
+            <div class="col-md-6 d-flex align-items-end">
+                <div class="form-check">
+                    <input asp-for="IsActive" class="form-check-input" />
+                    <label asp-for="IsActive" class="form-check-label">Active (visible on site)</label>
+                </div>
+            </div>
+            <div class="col-12">
+                <button type="submit" class="btn btn-admin">Create Project</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,58 @@
+@model List<Booking>
+@{
+    ViewData["Title"] = "Bookings";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h4 class="fw-bold mb-4">Booking Requests</h4>
+
+<div class="bg-white rounded shadow-sm">
+    @if (Model.Any())
+    {
+        <table class="table admin-table mb-0">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Project Type</th>
+                    <th>Budget</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var booking in Model)
+                {
+                    <tr class="@(!booking.IsRead ? "table-warning" : "")">
+                        <td><strong>@booking.Name</strong></td>
+                        <td>@booking.Email</td>
+                        <td>@booking.ProjectType</td>
+                        <td>@booking.BudgetRange</td>
+                        <td>@booking.CreatedAt.ToString("MMM dd, yyyy")</td>
+                        <td>
+                            @if (booking.IsRead)
+                            {
+                                <span class="badge bg-secondary">Read</span>
+                            }
+                            else
+                            {
+                                <span class="badge badge-unread">New</span>
+                            }
+                        </td>
+                        <td>
+                            <a href="/Admin/Bookings/Details/@booking.Id" class="btn btn-sm btn-outline-secondary">View</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <div class="text-center py-5 text-muted">
+            <i class="fas fa-inbox fa-2x mb-2"></i>
+            <p>No booking requests yet.</p>
+        </div>
+    }
+</div>

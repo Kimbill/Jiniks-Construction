@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Jiniks Construction</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    @await RenderSectionAsync("Styles", required: false)
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg fixed-top navbar-light bg-white shadow-sm" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand fw-bold fs-4" asp-controller="Home" asp-action="Index">
+                <span class="text-primary-orange">JINIKS</span> CONSTRUCTION
+            </a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto gap-1">
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Home" asp-action="Index">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Home" asp-action="About">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Portfolio" asp-action="Index">Portfolio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Booking" asp-action="Index">Book a Consultation</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Careers" asp-action="Index">Careers</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Contact" asp-action="Index">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        @RenderBody()
+    </main>
+
+    <footer class="bg-dark text-white pt-5 pb-4">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <h5 class="fw-bold mb-3"><span class="text-primary-orange">JINIKS</span> CONSTRUCTION</h5>
+                    <p class="text-white-50">Building excellence with integrity. Premium construction services for residential and commercial projects.</p>
+                </div>
+                <div class="col-lg-4">
+                    <h6 class="fw-bold mb-3">Quick Links</h6>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a class="text-white-50 text-decoration-none" asp-controller="Home" asp-action="About">About Us</a></li>
+                        <li class="mb-2"><a class="text-white-50 text-decoration-none" asp-controller="Portfolio" asp-action="Index">Our Portfolio</a></li>
+                        <li class="mb-2"><a class="text-white-50 text-decoration-none" asp-controller="Careers" asp-action="Index">Careers</a></li>
+                        <li class="mb-2"><a class="text-white-50 text-decoration-none" asp-controller="Contact" asp-action="Index">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4">
+                    <h6 class="fw-bold mb-3">Contact Info</h6>
+                    <ul class="list-unstyled text-white-50">
+                        <li class="mb-2"><i class="fas fa-map-marker-alt me-2 text-primary-orange"></i> Lagos, Nigeria</li>
+                        <li class="mb-2"><i class="fas fa-phone me-2 text-primary-orange"></i> +234 800 000 0000</li>
+                        <li class="mb-2"><i class="fas fa-envelope me-2 text-primary-orange"></i> info@jiniksconstruction.com</li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="border-secondary mt-4" />
+            <p class="text-center text-white-50 mb-0">&copy; @DateTime.Now.Year Jiniks Construction. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

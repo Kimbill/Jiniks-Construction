@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Jiniks Admin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/admin.css" asp-append-version="true" />
+</head>
+<body>
+    <div class="d-flex">
+        <nav class="admin-sidebar bg-dark text-white" id="sidebar">
+            <div class="p-3 border-bottom border-secondary">
+                <a href="/Admin" class="text-decoration-none text-white">
+                    <h5 class="mb-0 fw-bold"><span style="color: #E87A2E;">JINIKS</span> Admin</h5>
+                </a>
+            </div>
+            <ul class="nav flex-column p-3 gap-1">
+                <li class="nav-item">
+                    <a class="nav-link text-white-50" href="/Admin"><i class="fas fa-tachometer-alt me-2"></i> Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white-50" href="/Admin/HeroSlides"><i class="fas fa-images me-2"></i> Hero Slides</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white-50" href="/Admin/Projects"><i class="fas fa-building me-2"></i> Projects</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white-50" href="/Admin/Services"><i class="fas fa-cogs me-2"></i> Services</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white-50" href="/Admin/Jobs"><i class="fas fa-briefcase me-2"></i> Jobs</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white-50" href="/Admin/Bookings"><i class="fas fa-calendar-check me-2"></i> Bookings</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white-50" href="/Admin/Contacts"><i class="fas fa-envelope me-2"></i> Contacts</a>
+                </li>
+                <hr class="border-secondary" />
+                <li class="nav-item">
+                    <a class="nav-link text-white-50" href="/"><i class="fas fa-external-link-alt me-2"></i> View Site</a>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="admin-content flex-grow-1">
+            <nav class="navbar navbar-light bg-white shadow-sm px-4 mb-4">
+                <button class="btn btn-link d-lg-none text-dark" id="sidebarToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <span class="navbar-text ms-auto fw-semibold">Admin Panel</span>
+            </nav>
+
+            <div class="container-fluid px-4 pb-4">
+                @if (TempData["Success"] != null)
+                {
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        @TempData["Success"]
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                }
+                @if (TempData["Error"] != null)
+                {
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        @TempData["Error"]
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                }
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.getElementById('sidebarToggle')?.addEventListener('click', function () {
+            document.getElementById('sidebar').classList.toggle('show');
+        });
+    </script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,44 @@
+@model Booking
+@{
+    ViewData["Title"] = "Booking Details";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="mb-4">
+    <a href="/Admin/Bookings" class="text-decoration-none text-muted"><i class="fas fa-arrow-left me-1"></i> Back to Bookings</a>
+</div>
+
+<h4 class="fw-bold mb-4">Booking Details</h4>
+
+<div class="bg-white rounded shadow-sm p-4">
+    <div class="row g-4">
+        <div class="col-md-6">
+            <small class="text-muted">Name</small>
+            <p class="fw-semibold">@Model.Name</p>
+        </div>
+        <div class="col-md-6">
+            <small class="text-muted">Email</small>
+            <p class="fw-semibold">@Model.Email</p>
+        </div>
+        <div class="col-md-6">
+            <small class="text-muted">Phone</small>
+            <p class="fw-semibold">@Model.Phone</p>
+        </div>
+        <div class="col-md-6">
+            <small class="text-muted">Project Type</small>
+            <p class="fw-semibold">@Model.ProjectType</p>
+        </div>
+        <div class="col-md-6">
+            <small class="text-muted">Budget Range</small>
+            <p class="fw-semibold">@Model.BudgetRange</p>
+        </div>
+        <div class="col-md-6">
+            <small class="text-muted">Submitted</small>
+            <p class="fw-semibold">@Model.CreatedAt.ToString("MMMM dd, yyyy - hh:mm tt")</p>
+        </div>
+        <div class="col-12">
+            <small class="text-muted">Message</small>
+            <p class="fw-semibold" style="white-space: pre-line;">@Model.Message</p>
+        </div>
+    </div>
+</div>

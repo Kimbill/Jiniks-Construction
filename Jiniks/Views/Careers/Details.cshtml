@@ -1,0 +1,51 @@
+@model JobOpening
+@{
+    ViewData["Title"] = Model.Title;
+}
+
+<div class="page-header">
+    <div class="container">
+        <h1>@Model.Title</h1>
+        <p>
+            <span class="me-3"><i class="fas fa-map-marker-alt me-1"></i> @Model.Location</span>
+            <span><i class="fas fa-briefcase me-1"></i> @Model.Type</span>
+        </p>
+    </div>
+</div>
+
+<section class="section-padding">
+    <div class="container">
+        <div class="row g-5">
+            <div class="col-lg-7 fade-in">
+                <h4 class="fw-bold mb-3">Job Description</h4>
+                <div class="text-muted" style="line-height: 1.8; white-space: pre-line;">@Model.Description</div>
+
+                <a asp-action="Index" class="btn btn-outline-orange mt-4"><i class="fas fa-arrow-left me-2"></i>Back to Careers</a>
+            </div>
+            <div class="col-lg-5 fade-in">
+                <div class="bg-light p-4 rounded">
+                    <h5 class="fw-bold mb-3">Apply for this Position</h5>
+                    <form asp-controller="Careers" asp-action="Apply" method="post" enctype="multipart/form-data">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="JobOpeningId" value="@Model.Id" />
+
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Full Name</label>
+                            <input name="Name" class="form-control" required placeholder="Your full name" />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Email Address</label>
+                            <input name="Email" type="email" class="form-control" required placeholder="your@email.com" />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Upload CV</label>
+                            <input name="Cv" type="file" class="form-control" required accept=".pdf,.doc,.docx" />
+                            <small class="text-muted">PDF, DOC, or DOCX (max 10MB)</small>
+                        </div>
+                        <button type="submit" class="btn btn-orange w-100">Submit Application</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

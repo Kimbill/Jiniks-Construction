@@ -1,0 +1,56 @@
+@model List<Service>
+@{
+    ViewData["Title"] = "Manage Services";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h4 class="fw-bold mb-0">Services</h4>
+    <a href="/Admin/Services/Create" class="btn btn-admin">Add Service</a>
+</div>
+
+<div class="bg-white rounded shadow-sm">
+    <table class="table admin-table mb-0">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Icon</th>
+                <th>Order</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var service in Model)
+            {
+                <tr>
+                    <td><strong>@service.Title</strong></td>
+                    <td>
+                        @if (!string.IsNullOrEmpty(service.IconCssClass))
+                        {
+                            <i class="@service.IconCssClass"></i>
+                        }
+                    </td>
+                    <td>@service.SortOrder</td>
+                    <td>
+                        @if (service.IsActive)
+                        {
+                            <span class="badge bg-success">Active</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-secondary">Inactive</span>
+                        }
+                    </td>
+                    <td>
+                        <a href="/Admin/Services/Edit/@service.Id" class="btn btn-sm btn-outline-secondary me-1">Edit</a>
+                        <form method="post" action="/Admin/Services/Delete/@service.Id" class="d-inline" onsubmit="return confirm('Delete this service?');">
+                            @Html.AntiForgeryToken()
+                            <button class="btn btn-sm btn-outline-danger">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

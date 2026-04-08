@@ -1,0 +1,59 @@
+@model List<Project>
+@{
+    ViewData["Title"] = "Manage Projects";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h4 class="fw-bold mb-0">Projects</h4>
+    <a href="/Admin/Projects/Create" class="btn btn-admin">Add Project</a>
+</div>
+
+<div class="bg-white rounded shadow-sm">
+    <table class="table admin-table mb-0">
+        <thead>
+            <tr>
+                <th>Project</th>
+                <th>Location</th>
+                <th>Status</th>
+                <th>Media</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var project in Model)
+            {
+                <tr>
+                    <td>
+                        <div class="d-flex align-items-center gap-3">
+                            @if (!string.IsNullOrEmpty(project.CoverImageUrl))
+                            {
+                                <img src="@project.CoverImageUrl" alt="" style="width: 50px; height: 50px; object-fit: cover; border-radius: 6px;" />
+                            }
+                            <strong>@project.Title</strong>
+                        </div>
+                    </td>
+                    <td>@project.Location</td>
+                    <td>
+                        @if (project.IsActive)
+                        {
+                            <span class="badge bg-success">Active</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-secondary">Inactive</span>
+                        }
+                    </td>
+                    <td>@project.Media.Count items</td>
+                    <td>
+                        <a href="/Admin/Projects/Edit/@project.Id" class="btn btn-sm btn-outline-secondary me-1">Edit</a>
+                        <form method="post" action="/Admin/Projects/Delete/@project.Id" class="d-inline" onsubmit="return confirm('Are you sure you want to delete this project?');">
+                            @Html.AntiForgeryToken()
+                            <button class="btn btn-sm btn-outline-danger">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

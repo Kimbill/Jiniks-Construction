@@ -1,0 +1,118 @@
+@model ProjectFormViewModel
+@{
+    ViewData["Title"] = "Edit Project";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    var media = ViewBag.Media as List<ProjectMedia> ?? new List<ProjectMedia>();
+}
+
+<div class="mb-4">
+    <a href="/Admin/Projects" class="text-decoration-none text-muted"><i class="fas fa-arrow-left me-1"></i> Back to Projects</a>
+</div>
+
+<h4 class="fw-bold mb-4">Edit Project</h4>
+
+<div class="bg-white rounded shadow-sm p-4 mb-4">
+    <form method="post" enctype="multipart/form-data">
+        @Html.AntiForgeryToken()
+        <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+        <div class="row g-3">
+            <div class="col-md-8">
+                <label asp-for="Title" class="form-label fw-semibold"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger small"></span>
+            </div>
+            <div class="col-md-4">
+                <label asp-for="Location" class="form-label fw-semibold"></label>
+                <input asp-for="Location" class="form-control" />
+                <span asp-validation-for="Location" class="text-danger small"></span>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="CompletionDate" class="form-label fw-semibold">Completion Date</label>
+                <input asp-for="CompletionDate" type="date" class="form-control" />
+            </div>
+            <div class="col-md-6">
+                <label asp-for="Scope" class="form-label fw-semibold"></label>
+                <input asp-for="Scope" class="form-control" />
+            </div>
+            <div class="col-12">
+                <label asp-for="Description" class="form-label fw-semibold"></label>
+                <textarea asp-for="Description" class="form-control" rows="4"></textarea>
+                <span asp-validation-for="Description" class="text-danger small"></span>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="CoverImage" class="form-label fw-semibold">Cover Image</label>
+                <input asp-for="CoverImage" type="file" class="form-control" accept="image/*" />
+                @if (!string.IsNullOrEmpty(Model.ExistingCoverImageUrl))
+                {
+                    <img src="@Model.ExistingCoverImageUrl" alt="Current cover" class="mt-2 rounded" style="max-height: 100px;" />
+                }
+            </div>
+            <div class="col-md-6 d-flex align-items-end">
+                <div class="form-check">
+                    <input asp-for="IsActive" class="form-check-input" />
+                    <label asp-for="IsActive" class="form-check-label">Active (visible on site)</label>
+                </div>
+            </div>
+            <div class="col-12">
+                <button type="submit" class="btn btn-admin">Save Changes</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="bg-white rounded shadow-sm p-4">
+    <h5 class="fw-bold mb-3">Project Media</h5>
+
+    @if (media.Any())
+    {
+        <div class="row g-3 mb-4">
+            @foreach (var item in media)
+            {
+                <div class="col-md-3">
+                    <div class="position-relative">
+                        @if (item.MediaType == MediaType.Video)
+                        {
+                            <video src="@item.MediaUrl" class="w-100 rounded" style="height: 150px; object-fit: cover;" controls></video>
+                        }
+                        else
+                        {
+                            <img src="@item.MediaUrl" alt="" class="w-100 rounded" style="height: 150px; object-fit: cover;" />
+                        }
+                        <form method="post" action="/Admin/Projects/DeleteMedia/@item.Id" class="position-absolute top-0 end-0 m-1">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="projectId" value="@Model.Id" />
+                            <button class="btn btn-sm btn-danger rounded-circle" style="width: 30px; height: 30px; padding: 0;" title="Remove">
+                                <i class="fas fa-times" style="font-size: 0.75rem;"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+
+    <form method="post" action="/Admin/Projects/AddMedia/@Model.Id" enctype="multipart/form-data">
+        @Html.AntiForgeryToken()
+        <div class="row g-3 align-items-end">
+            <div class="col-md-5">
+                <label class="form-label fw-semibold">Upload Media</label>
+                <input name="file" type="file" class="form-control" accept="image/*,video/*" required />
+            </div>
+            <div class="col-md-4">
+                <label class="form-label fw-semibold">Media Type</label>
+                <select name="mediaType" class="form-select">
+                    <option value="@MediaType.Image">Image</option>
+                    <option value="@MediaType.Video">Video</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <button type="submit" class="btn btn-admin w-100">Upload</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
