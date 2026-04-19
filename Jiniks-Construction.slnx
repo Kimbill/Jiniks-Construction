@@ -1,6 +1,7 @@
 <Solution>
   <Folder Name="/Solution Items/">
-    <File Path="nixpacks.toml" />
+    <File Path="Dockerfile.txt" />
+    <File Path="railpack.json" />
   </Folder>
   <Project Path="Jiniks/Jiniks.csproj" />
 </Solution>
