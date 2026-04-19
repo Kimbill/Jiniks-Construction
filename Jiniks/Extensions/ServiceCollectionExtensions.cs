@@ -18,8 +18,16 @@ public static class ServiceCollectionExtensions
 
     public static IServiceCollection AddCloudinaryIntegration(this IServiceCollection services, IConfiguration configuration)
     {
-        services.Configure<CloudinarySettings>(configuration.GetSection("Cloudinary"));
+        services.Configure<CloudinarySettings>(configuration.GetSection("CloudinarySettings"));
         services.AddScoped<ICloudinaryService, CloudinaryService>();
+
+        return services;
+    }
+
+    public static IServiceCollection AddInfrastructureSettings(this IServiceCollection services, IConfiguration configuration)
+    {
+        services.Configure<EmailSettings>(configuration.GetSection("EmailSettings"));
+        services.Configure<PhotoSettings>(configuration.GetSection("PhotoSettings"));
 
         return services;
     }
